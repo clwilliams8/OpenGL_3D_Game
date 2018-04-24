@@ -28,16 +28,32 @@ public class MainGameLoop {
         Loader loader = new Loader();
          
          
-        RawModel model = OBJLoader.loadObjModel("tree", loader);
+        RawModel treeModel = OBJLoader.loadObjModel("tree", loader);
+        RawModel grassModel = OBJLoader.loadObjModel("grassModel", loader);
+        RawModel fernModel = OBJLoader.loadObjModel("fern", loader);
+
+
          
-        TexturedModel staticModel = new TexturedModel(model,new ModelTexture(loader.loadTexture("tree")));
+        TexturedModel tree = new TexturedModel(treeModel,new ModelTexture(loader.loadTexture("tree")));
+        TexturedModel grass = new TexturedModel(grassModel,new ModelTexture(loader.loadTexture("grassTexture")));
+        TexturedModel fern = new TexturedModel(fernModel,new ModelTexture(loader.loadTexture("fern")));
+
          
         List<Entity> entities = new ArrayList<Entity>();
         Random random = new Random();
-        for(int i=0;i<400;i++){
-            entities.add(new Entity(staticModel, new Vector3f(random.nextFloat()*800 - 400,0,random.nextFloat() * -600),0,0,0,3));
+        for(int i=0;i<300;i++){
+            entities.add(new Entity(tree, new Vector3f(random.nextFloat()*800 - 400,0,random.nextFloat() * -600),0,0,0,3));
         }
-         
+        
+        for(int i=0;i<100;i++){
+            entities.add(new Entity(grass, new Vector3f(random.nextFloat()*800 - 400,0,random.nextFloat() * -600),0,0,0,3));
+        }
+        
+        for(int i=0;i<100;i++){
+            entities.add(new Entity(fern, new Vector3f(random.nextFloat()*800 - 400,0,random.nextFloat() * -600),0,0,0,3));
+        }
+        
+        
         Light light = new Light(new Vector3f(20000,20000,2000),new Vector3f(1,1,1));
          
         Terrain terrain = new Terrain(0,-1,loader,new ModelTexture(loader.loadTexture("grass")));
