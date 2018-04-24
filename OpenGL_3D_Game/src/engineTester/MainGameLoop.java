@@ -6,6 +6,7 @@ import renderEngine.DisplayManager;
 import renderEngine.Loader;
 import renderEngine.RawModel;
 import renderEngine.Renderer;
+import shaders.StaticShader;
 
 public class MainGameLoop {
 
@@ -15,6 +16,7 @@ public class MainGameLoop {
 		
 		Loader loader = new Loader();
 		Renderer renderer = new Renderer();
+		StaticShader shader = new StaticShader();
 		
 		//OpenGl wants these define counterclockwise
 		
@@ -34,19 +36,19 @@ public class MainGameLoop {
 		
 		while(!Display.isCloseRequested()) {
 			
-			//reset renderer
-			renderer.prepare();
-			
 			//game logic
 			
-			
 			//render
+			renderer.prepare();
+			shader.start();
 			renderer.render(model);
+			shader.stop();
 			DisplayManager.updateDisplay();
 			
 			
 			
 		}
+		shader.cleanUp();
 		loader.cleanUP();
 		DisplayManager.closeDisplay();
 		
