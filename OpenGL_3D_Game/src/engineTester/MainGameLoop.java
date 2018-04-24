@@ -6,7 +6,9 @@ import java.util.Random;
  
 import models.RawModel;
 import models.TexturedModel;
- 
+import objConverter.ModelData;
+import objConverter.OBJFileLoader;
+
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector3f;
  
@@ -28,29 +30,46 @@ public class MainGameLoop {
         Loader loader = new Loader();
          
          
-        RawModel treeModel = OBJLoader.loadObjModel("tree", loader);
-        RawModel grassModel = OBJLoader.loadObjModel("grassModel", loader);
-        RawModel fernModel = OBJLoader.loadObjModel("fern", loader);
+        ModelData treeModel = OBJFileLoader.loadOBJ("tree");
+        ModelData grassModel = OBJFileLoader.loadOBJ("grassModel");
+        ModelData fernModel = OBJFileLoader.loadOBJ("fern");
 
-
+        RawModel tree = loader.loadToVAO(treeModel.getVertices(), 
+        		treeModel.getTextureCoords(), 
+        		treeModel.getNormals(), 
+        		treeModel.getIndices());
+        
+        RawModel grass = loader.loadToVAO(grassModel.getVertices(), 
+        		grassModel.getTextureCoords(), 
+        		grassModel.getNormals(), 
+        		grassModel.getIndices());
+        
+        RawModel fern = loader.loadToVAO(fernModel.getVertices(), 
+        		fernModel.getTextureCoords(), 
+        		fernModel.getNormals(), 
+        		fernModel.getIndices());
          
-        TexturedModel tree = new TexturedModel(treeModel,new ModelTexture(loader.loadTexture("tree")));
-        TexturedModel grass = new TexturedModel(grassModel,new ModelTexture(loader.loadTexture("grassTexture")));
-        TexturedModel fern = new TexturedModel(fernModel,new ModelTexture(loader.loadTexture("fern")));
+        TexturedModel treeTexture = new TexturedModel(tree,new ModelTexture(loader.loadTexture("tree")));
+        TexturedModel grassTexture = new TexturedModel(grass,new ModelTexture(loader.loadTexture("grassTexture")));
+        grassTexture.getTexture().setHasTransparency(true);
+        grassTexture.getTexture().setUseFakeLighting(true);
+        TexturedModel fernTexture = new TexturedModel(fern,new ModelTexture(loader.loadTexture("fern")));
+        fernTexture.getTexture().setHasTransparency(true);
 
+        
          
         List<Entity> entities = new ArrayList<Entity>();
         Random random = new Random();
         for(int i=0;i<300;i++){
-            entities.add(new Entity(tree, new Vector3f(random.nextFloat()*800 - 400,0,random.nextFloat() * -600),0,0,0,3));
+            entities.add(new Entity(treeTexture, new Vector3f(random.nextFloat()*800 - 400,0,random.nextFloat() * -600),0,0,0,3));
         }
         
         for(int i=0;i<100;i++){
-            entities.add(new Entity(grass, new Vector3f(random.nextFloat()*800 - 400,0,random.nextFloat() * -600),0,0,0,3));
+            entities.add(new Entity(grassTexture, new Vector3f(random.nextFloat()*800 - 400,0,random.nextFloat() * -600),0,0,0,3));
         }
         
         for(int i=0;i<100;i++){
-            entities.add(new Entity(fern, new Vector3f(random.nextFloat()*800 - 400,0,random.nextFloat() * -600),0,0,0,3));
+            entities.add(new Entity(fernTexture, new Vector3f(random.nextFloat()*800 - 400,0,random.nextFloat() * -600),0,0,0,3));
         }
         
         
