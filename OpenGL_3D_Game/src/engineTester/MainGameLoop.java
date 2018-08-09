@@ -15,7 +15,6 @@ import org.lwjgl.util.vector.Vector3f;
 import renderEngine.DisplayManager;
 import renderEngine.Loader;
 import renderEngine.MasterRenderer;
-import renderEngine.OBJLoader;
 import terrains.Terrain;
 import textures.ModelTexture;
 import textures.TerrainTexture;
@@ -32,7 +31,7 @@ public class MainGameLoop {
         DisplayManager.createDisplay();
         Loader loader = new Loader();
          
-         //***************TERRAIN TEXTURE*************//
+         //***************TERRAIN TEXTURE************* test//
         
         TerrainTexture backgroundTexture = new TerrainTexture(loader.loadTexture("grassy"));
         TerrainTexture rTexture = new TerrainTexture(loader.loadTexture("dirt"));
