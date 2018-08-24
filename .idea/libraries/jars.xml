@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="jars">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/OpenGL_3D_Game/lib/jars/slick-util.jar!/" />
+      <root url="jar://$PROJECT_DIR$/OpenGL_3D_Game/lib/jars/lwjgl.jar!/" />
+      <root url="jar://$PROJECT_DIR$/OpenGL_3D_Game/lib/jars/lwjgl_util.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <NATIVE>
+      <root url="file://$PROJECT_DIR$/OpenGL_3D_Game/lib/natives" />
+    </NATIVE>
+    <SOURCES />
+  </library>
+</component>
