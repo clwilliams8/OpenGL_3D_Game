@@ -1,5 +1,5 @@
 # OpenGL_3D_Game
-READ ME:
+A project I did based on this series
 
 After pulling this project down, you will have to set your Run Configurations for whatever IDE you are using to Application
 or Java Application, set the main class to engineTester.MainGameLoop, set the working directory, in my case it is
